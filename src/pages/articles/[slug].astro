@@ -12,10 +12,10 @@ import '../../assets/css/animate.css';
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
+import config from '../../config';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
-  console.log(postsWithSlugs);
 
   return postsWithSlugs.edges.map(({ node }) => {
     return {
@@ -26,10 +26,13 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
-post.content = post.content.replace('astrowp.local', 'piscine-nice.com');
+post.content = post.content.replace(
+  'http://astrowp.local',
+  `${config.url}/articles`
+);
 ---
 
-<html lang="en">
+<html lang="fr">
   <head>
     <meta name="robots" content="noindex" />
     <meta charset="UTF-8" />

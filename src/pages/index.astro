@@ -1,24 +1,202 @@
 ---
+import Header from '../components/Header.astro';
+import '../assets/css/bootstrap.min.css';
+import '../assets/css/font-awesome.min.css';
+import '../assets/css/flaticon.css';
+import '../assets/css/payment-webfont.css';
+// import '../assets/css/flexslider.css';
+// import '../assets/css/slick.css';
+// import '../assets/css/slick-theme.css';
+import '../assets/css/animate.css';
+import '../assets/css/style.css';
+import '../assets/css/responsive.css';
+import '../assets/css/article.css';
+import { Image } from '@astrojs/image/components';
+import imageBlog from '../assets/images/bg_home.webp';
+
 import { getAllPostsWithSlugs } from '../lib/api';
 
 const postsWithSlugs = await getAllPostsWithSlugs();
-console.log(postsWithSlugs);
 ---
 
-<html lang="en">
+<html lang="fr">
   <head>
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=0"
+    />
     <meta name="robots" content="noindex" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta
-      name="viewport"
-      content="width=device-  const postsWithSlugs = await getAllPostsWithSlugs();
-    console.log(postsWithSlugs);width"
-    />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+
+    <title>Piscine Nice - Informations et conseils pour votre piscine</title>
   </head>
   <body>
-    <h1>Astro</h1>
+    <Header />
+    <div id="page" class="page">
+      <!-- HERO-15
+			============================================= -->
+      <section
+        style="background-color: red;"
+        id="hero-15"
+        class="bg-scroll hero-section division"
+      >
+        <div class="container">
+          <div class="row hero-row-160">
+            <!-- HERO TEXT -->
+            <div class="col-md-8 col-lg-7">
+              <div class="hero-txt white-color">
+                <!-- Title -->
+                <p class="h3-hero-small white-color">Piscine Nice</p>
+                <h1 class="h2-hero-huge white-color">
+                  Informations & conseils <br />
+                  pour votre piscine
+                </h1>
+
+                <!-- Text -->
+                <p class="p-hero-medium">
+                  Piscine Nice c'est une équipe de passionné par les piscines
+                  mais pas que. Retrouvez articles et conseils pour bien
+                  entretenir votre piscine, mais surtout vous guidez dans
+                  l'univers riche des piscines. Ne vous laissez pas submerger
+                  par la recherche sur l'entretien de votre piscine. Nous avons
+                  mis au point une série de guide qui vous permettra
+                  d'entretenir facilement votre piscine. Retrouvez également
+                  notre avis dans une série d’article pour vous aider à faire le
+                  bon choix sur les différents produits.
+                </p>
+              </div>
+            </div>
+            <!-- END HERO TEXT -->
+          </div>
+          <!-- End row -->
+        </div>
+        <!-- End container -->
+      </section>
+      <!-- END HERO-15 -->
+
+      <!-- BLOG-1
+			============================================= -->
+      <section id="blog-1" class="wide-70 blog-section division">
+        <div class="container">
+          <!-- SECTION TITLE 	-->
+          <div class="row">
+            <div class="col section-title">
+              <div class="row section-row">
+                <!-- SECTION TITLE TEXT	-->
+                <div class="col-md-7 col-lg-8 col-xl-7 section-title-txt">
+                  <!-- Section ID -->
+                  <span class="section-id"
+                    >Les nouvelles de la planète piscine</span
+                  >
+
+                  <!-- Title -->
+                  <h2 class="h2-small">Nos derniers articles et guides</h2>
+
+                  <!-- Text -->
+                  <p>
+                    Retrouvez des articles complet pour l'entretien de votre
+                    piscine
+                  </p>
+                </div>
+
+                <!-- SECTION TITLE BUTTON 
+					 			<div class="col-md-5 col-lg-4 col-xl-5 section-title-btn">
+									<a href="#" class="btn btn-yellow btn-arrow">
+										<span>Read All Posts <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+									</a>	
+					 			</div>	-->
+              </div>
+            </div>
+          </div>
+          <!-- END SECTION TITLE -->
+
+          <!-- BLOG POSTS HOLDER -->
+          <div class="row">
+            <!-- BLOG POST #1 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="blog-post">
+                <!-- BLOG POST IMAGE -->
+                <div class="blog-post-img m-bottom-30">
+                  <Image loading="lazy" alt="article" src={imageBlog} />
+                </div>
+
+                <!-- BLOG POST TEXT -->
+                <div class="blog-post-txt m-bottom-10">
+                  <!-- Post Data -->
+                  <span>29 Octobre 2022 - Algues</span>
+
+                  <!-- Post Title -->
+                  <h3 class="h5-lg" style="font-size: 22px;">
+                    Comment tuer les algues de votre piscine ?
+                  </h3>
+
+                  <!-- Post Text -->
+                  <p>
+                    Il est déjà assez difficile de découvrir que votre piscine
+                    est infectée par de vieilles algues vertes. Heureusement,
+                    c’est généralement assez simple à traiter. Mais si vous
+                    découvrez des algues noires dans votre piscine,
+                    préparez-vous car vous avez du travail à faire pour que
+                    votre piscine redevienne normale. Et pour des raisons de
+                    sécurité, personne ne doit s’y baigner avant que vous ne le
+                    fassiez.
+                  </p>
+                </div>
+
+                <hr />
+
+                <!-- BLOG POST META -->
+                <div class="blog-post-meta text-right">
+                  <span
+                    ><i class="fa fa-heart-o" aria-hidden="true"></i> 15</span
+                  >
+                  <span
+                    ><i class="fa fa-comment-o" aria-hidden="true"></i> 8</span
+                  >
+
+                  <!-- Post Link -->
+                  <a
+                    href="/articles/comment-tuer-les-algues-noires-dans-votre-piscine"
+                    >En savoir plus
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- END  BLOG POST #1 -->
+
+            <!-- END  BLOG POST #1 -->
+          </div>
+          <!-- END BLOG POSTS HOLDER -->
+        </div>
+        <!-- End container -->
+      </section>
+      <!-- END BLOG-1 -->
+    </div>
+
+    <!-- EXTERNAL SCRIPTS
+		============================================= -->
+    <script>
+      import '../assets/js/jquery-3.2.1.min.js';
+      import '../assets/js/bootstrap.min.js';
+      import '../assets/js/modernizr.custom.js';
+      import '../assets/js/jquery.easing.js';
+      import '../assets/js/jquery.stellar.min.js';
+      import '../assets/js/jquery.scrollto.js';
+      import '../assets/js/jquery.appear.js';
+      import '../assets/js/jquery.flexslider.js';
+      import '../assets/js/jquery.magnific-popup.min.js';
+      import '../assets/js/slick.min.js';
+      import '../assets/js/owl.carousel.min.js';
+      import '../assets/js/jquery.mixitup.js';
+      import '../assets/js/jquery.ajaxchimp.min.js';
+      import '../assets/js/register-form.js';
+      import '../assets/js/contact-form.js';
+      import '../assets/js/comment-form.js';
+      import '../assets/js/jquery.validate.min.js';
+
+      import '../assets/js/custom.js';
+    </script>
   </body>
 </html>

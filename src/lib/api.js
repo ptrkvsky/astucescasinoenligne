@@ -62,6 +62,33 @@ export async function getAllPostsWithSlugs() {
   return data?.posts;
 }
 
+export async function getAllPostsListing() {
+  const data = await fetchAPI(`
+  {
+    posts(first: 10000) {
+      edges {
+        node {
+          featuredImage{ 
+          	node {
+              altText
+              srcSet
+            	link
+            }
+          }
+          title
+          date
+          link
+          excerpt
+          slug
+        }
+      }
+    }
+  }
+  `);
+
+  return data?.posts;
+}
+
 export async function getPostBySlug(slug) {
   const data = await fetchAPI(`
   {

@@ -12,7 +12,12 @@
 :root {
   --title: Futura, Poppins, -apple-system, BlinkMacSystemFont, Roboto,
     Arial Black, Arial Bold, Arial, sans-serif;
-  --dark-blue: #01516e;
+  --dark-blue: #093e7d;
+  --light-blue: #093e7d;
+}
+
+a {
+  color: var(--light-blue);
 }
 
 h1,
@@ -2102,7 +2107,7 @@ span.section-id {
 }
 
 #hero-15 {
-  background-image: url(../images/hero-15.jpg);
+  background-image: url('../images/bg_home.webp');
 }
 
 #hero-16 {

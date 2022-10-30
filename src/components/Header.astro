@@ -1,6 +1,7 @@
 ---
 import logo from '../assets/images/piscine-nice-logo.jpg';
-import { Image, Picture } from '@astrojs/image/components';
+import { Image } from '@astrojs/image/components';
+import config from '../config';
 ---
 
 <header id="header" class="header">
@@ -8,7 +9,7 @@ import { Image, Picture } from '@astrojs/image/components';
     <div class="container">
       <!-- LOGO IMAGE -->
       <!-- Recommended sizes for Retina Ready displays is 230x60px; -->
-      <a href="#single-post-page" class="navbar-brand logo-black"
+      <a href={config.url} class="navbar-brand logo-black"
         ><Image height="50" alt="lgoo" src={logo} />
       </a>
       <!-- Responsive Menu Button -->
@@ -29,7 +30,7 @@ import { Image, Picture } from '@astrojs/image/components';
         <a href="#single-post-page" class="navbar-brand"> </a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/articles">Blog</a>
+            <a class="nav-link" href="/articles">Articles</a>
           </li>
 
           <!-- Dropdown Link 

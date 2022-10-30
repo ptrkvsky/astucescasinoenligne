@@ -1,20 +1,78 @@
 ---
-import { getAllPostsWithSlugs } from '../../lib/api';
+import { getAllPostsListing } from '../../lib/api';
+import { Picture } from '@astrojs/image/components';
+import Header from '../../components/Header.astro';
+import config from '../../config';
+import '../../assets/css/bootstrap.min.css';
+import '../../assets/css/font-awesome.min.css';
+import '../../assets/css/flaticon.css';
+import '../../assets/css/payment-webfont.css';
+import '../../assets/css/flexslider.css';
+import '../../assets/css/slick.css';
+import '../../assets/css/slick-theme.css';
+import '../../assets/css/animate.css';
+import '../../assets/css/style.css';
+import '../../assets/css/responsive.css';
+import '../../assets/css/article.css';
 
-const postsWithSlugs = await getAllPostsWithSlugs();
-console.log(postsWithSlugs);
+const posts = await getAllPostsListing();
 ---
 
-<html lang="en">
-  <head>
-    <meta name="robots" content="noindex" />
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<meta name="robots" content="noindex" />
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="viewport" content="width=device-width" />
+<title>Articles et conseils pour la piscine</title>
+
+<body>
+  <Header />
+
+  <div id="blog-page" class="blog-page-section division">
+    <div class="container">
+      <div class="row">
+        <!-- BLOG POSTS HOLDER -->
+        <div class="col-md-12">
+          <div class="posts-holder p-right-60">
+            {
+              posts.edges.map(({ node }) => (
+                <div class="blog-post">
+                  <div class="blog-post-txt m-bottom-10">
+                    <span>{node.date}</span>
+                    {node?.featuredImage && (
+                      <a href={`${config.url}/articles/${node.slug}`}>
+                        <Picture
+                          sizes={node.featuredImage.node.sizes}
+                          src={node.featuredImage.node.link}
+                          widths={[300, 300, 450]}
+                          aspectRatio="1:1"
+                          alt="test"
+                          formats={['avif']}
+                          background="#fff"
+                        />
+                      </a>
+                    )}
+                    <a href={`${config.url}/articles/${node.slug}`}>
+                      <h3 class="h4-lg">{node.title}</h3>
+                    </a>
+                    <div set:html={node.excerpt} />
+                  </div>
+
+                  <hr />
+
+                  <div class="blog-post-meta text-right">
+                    <span>
+                      <i class="fa fa-heart-o" aria-hidden="true" /> 15
+                    </span>
+                    <span>
+                      <i class="fa fa-comment-o" aria-hidden="true" /> 8
+                    </span>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
