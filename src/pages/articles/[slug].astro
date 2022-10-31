@@ -21,7 +21,7 @@ const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
 const content = post.content.replace(
   'http://astrowp.local',
-  `https://piscine-nice.com/articles`
+  `https://www.piscine-nice.com/articles`
 );
 
 const schema = JSON.stringify(post.seo.schema.raw).replace(
