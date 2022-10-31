@@ -18,11 +18,9 @@ export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
 
   return postsWithSlugs.edges.map(({ node }) => {
-    return node.status === 'publish'
-      ? {
-          params: { slug: node.slug },
-        }
-      : null;
+    return {
+      params: { slug: node.slug },
+    };
   });
 }
 
