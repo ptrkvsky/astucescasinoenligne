@@ -39,7 +39,7 @@ const posts = await getAllPostsListing();
                   <div class="blog-post-txt m-bottom-10">
                     <span>{new Date(node.date).toLocaleDateString('fr')}</span>
 
-                    <a href={`${config.url}/articles/${node.slug}`}>
+                    <a href={`${import.meta.env.URL}/articles/${node.slug}`}>
                       <h2 class="h4-lg">{node.title}</h2>
                     </a>
                     <div set:html={node.excerpt} />
