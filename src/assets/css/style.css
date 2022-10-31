@@ -1700,6 +1700,11 @@ span.section-id {
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
+  font-family: var(--title);
+  color: var(--dark-blue) !important;
+  text-transform: uppercase;
+  font-weight: bolder;
+  letter-spacing: 1.2px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -4209,7 +4214,7 @@ p.p-hero-medium {
 }
 
 #single-post-page {
-  margin-top: 160px;
+  margin-top: 80px;
   margin-bottom: 60px;
 }
 

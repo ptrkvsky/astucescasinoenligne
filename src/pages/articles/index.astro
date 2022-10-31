@@ -37,22 +37,10 @@ const posts = await getAllPostsListing();
               posts.edges.map(({ node }) => (
                 <div class="blog-post">
                   <div class="blog-post-txt m-bottom-10">
-                    <span>{node.date}</span>
-                    {node?.featuredImage && (
-                      <a href={`${config.url}/articles/${node.slug}`}>
-                        <Picture
-                          sizes={node.featuredImage.node.sizes}
-                          src={node.featuredImage.node.link}
-                          widths={[300, 300, 450]}
-                          aspectRatio="1:1"
-                          alt="test"
-                          formats={['avif']}
-                          background="#fff"
-                        />
-                      </a>
-                    )}
+                    <span>{new Date(node.date).toLocaleDateString('fr')}</span>
+
                     <a href={`${config.url}/articles/${node.slug}`}>
-                      <h3 class="h4-lg">{node.title}</h3>
+                      <h2 class="h4-lg">{node.title}</h2>
                     </a>
                     <div set:html={node.excerpt} />
                   </div>
