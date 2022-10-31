@@ -68,6 +68,7 @@ export async function getAllPostsListing() {
     posts(first: 10000) {
       edges {
         node {
+          status
           featuredImage{ 
           	node {
               altText

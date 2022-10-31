@@ -1,8 +1,6 @@
 ---
 import { getAllPostsListing } from '../../lib/api';
-import { Picture } from '@astrojs/image/components';
 import Header from '../../components/Header.astro';
-import config from '../../config';
 import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/font-awesome.min.css';
 import '../../assets/css/flaticon.css';
@@ -18,7 +16,7 @@ import '../../assets/css/article.css';
 const posts = await getAllPostsListing();
 ---
 
-<meta name="robots" content="noindex" />
+<!-- <meta name="robots" content="noindex" /> -->
 <meta charset="utf-8" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="viewport" content="width=device-width" />
@@ -34,29 +32,33 @@ const posts = await getAllPostsListing();
         <div class="col-md-12">
           <div class="posts-holder p-right-60">
             {
-              posts.edges.map(({ node }) => (
-                <div class="blog-post">
-                  <div class="blog-post-txt m-bottom-10">
-                    <span>{new Date(node.date).toLocaleDateString('fr')}</span>
+              posts.edges.map(({ node }) => {
+                return node.status === 'publish' ? (
+                  <div class="blog-post">
+                    <div class="blog-post-txt m-bottom-10">
+                      <span>
+                        {new Date(node.date).toLocaleDateString('fr')}
+                      </span>
 
-                    <a href={`https://piscine-nice.com/articles/${node.slug}`}>
-                      <h2 class="h4-lg">{node.title}</h2>
-                    </a>
-                    <div set:html={node.excerpt} />
+                      <a
+                        href={`https://piscine-nice.com/articles/${node.slug}`}
+                      >
+                        <h2 class="h4-lg">{node.title}</h2>
+                      </a>
+                      <div set:html={node.excerpt} />
+                    </div>
+                    <hr />
+                    <div class="blog-post-meta text-right">
+                      <span>
+                        <i class="fa fa-heart-o" aria-hidden="true" /> 15
+                      </span>
+                      <span>
+                        <i class="fa fa-comment-o" aria-hidden="true" /> 8
+                      </span>
+                    </div>
                   </div>
-
-                  <hr />
-
-                  <div class="blog-post-meta text-right">
-                    <span>
-                      <i class="fa fa-heart-o" aria-hidden="true" /> 15
-                    </span>
-                    <span>
-                      <i class="fa fa-comment-o" aria-hidden="true" /> 8
-                    </span>
-                  </div>
-                </div>
-              ))
+                ) : null;
+              })
             }
           </div>
         </div>
