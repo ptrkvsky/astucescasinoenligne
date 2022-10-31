@@ -1,5 +1,5 @@
 const API_URL = import.meta.env.WP_URL;
-console.log('API_URLAPI_URLAPI_URLAPI_URLAPI_URL', API_URL);
+
 async function fetchAPI(query, { variables } = {}) {
   const headers = { 'Content-Type': 'application/json' };
   const res = await fetch(API_URL, {
@@ -95,7 +95,15 @@ export async function getPostBySlug(slug) {
   {
     post(id: "${slug}", idType: URI) {
       title
+      slug
       content
+      seo {
+        title
+        metaDesc
+        schema {
+          raw
+        }
+      }
     }
   }
   `);

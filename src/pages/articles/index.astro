@@ -21,6 +21,11 @@ const posts = await getAllPostsListing();
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="viewport" content="width=device-width" />
 <title>Articles et conseils pour la piscine</title>
+<meta
+  name="description"
+  content="Piscine Nice vous présente ses meilleurs articles sur l'entretien de votre piscine. Découvrez des guides complets pour une eau toujours plus propre."
+/>
+<link rel="canonical" href="https://www.piscine-nice.com/article" />
 
 <body>
   <Header />
@@ -40,22 +45,12 @@ const posts = await getAllPostsListing();
                         {new Date(node.date).toLocaleDateString('fr')}
                       </span>
 
-                      <a
-                        href={`https://piscine-nice.com/articles/${node.slug}`}
-                      >
+                      <a href={`/articles/${node.slug}`}>
                         <h2 class="h4-lg">{node.title}</h2>
                       </a>
                       <div set:html={node.excerpt} />
                     </div>
                     <hr />
-                    <div class="blog-post-meta text-right">
-                      <span>
-                        <i class="fa fa-heart-o" aria-hidden="true" /> 15
-                      </span>
-                      <span>
-                        <i class="fa fa-comment-o" aria-hidden="true" /> 8
-                      </span>
-                    </div>
                   </div>
                 ) : null;
               })

@@ -2,17 +2,10 @@
 import { getAllPostsWithSlugs, getPostBySlug } from '../../lib/api';
 import Header from '../../components/Header.astro';
 import '../../assets/css/bootstrap.min.css';
-import '../../assets/css/font-awesome.min.css';
-import '../../assets/css/flaticon.css';
-import '../../assets/css/payment-webfont.css';
-import '../../assets/css/flexslider.css';
-import '../../assets/css/slick.css';
-import '../../assets/css/slick-theme.css';
-import '../../assets/css/animate.css';
+
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
-import config from '../../config';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
@@ -26,9 +19,14 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
-post.content = post.content.replace(
+const content = post.content.replace(
   'http://astrowp.local',
-  `https://www.piscine-nice.com/articles`
+  `https://piscine-nice.com/articles`
+);
+
+const schema = JSON.stringify(post.seo.schema.raw).replace(
+  'http://astrowp.local',
+  `https://www.piscine-nice.com`
 );
 ---
 
@@ -36,7 +34,13 @@ post.content = post.content.replace(
   <head>
     <meta name="robots" content="noindex" />
     <meta charset="UTF-8" />
-    <title>{post.title}</title>
+    <script type="application/ld+json" set:html={schema}></script>
+    <title>{post.seo.title}</title>
+    <meta name="description" content={post.seo.metaDesc} />
+    <link
+      rel="canonical"
+      href={`https://www.piscine-nice.com/article/${post.slug}`}
+    />
     <meta name="viewport" content="width=device-width" />
     <!-- GOOGLE FONTS -->
     <link
@@ -58,7 +62,13 @@ post.content = post.content.replace(
             <!-- SINGLE POST -->
             <div class="col-md-12">
               <h1>{post.title}</h1>
-              <article class="prose lg:prose-xl" set:html={post.content}>
+              <article
+                class="prose lg:prose-xl"
+                set:html={content.replace(
+                  'http://astrowp.local',
+                  `https://piscine-nice.com/articles`
+                )}
+              >
               </article>
             </div>
           </div>
