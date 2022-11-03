@@ -33,7 +33,7 @@ const schema = JSON.stringify(post.seo.schema.raw).replace(
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <script type="application/ld+json" set:html={JSON.parse({schema})></script>
+    <script type="application/ld+json" set:html={JSON.parse(schema)}></script>
     <title>{post.seo.title}</title>
     <meta name="description" content={post.seo.metaDesc} />
     <link
