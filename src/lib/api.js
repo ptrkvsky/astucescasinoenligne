@@ -45,7 +45,6 @@ export async function getPageBySlug(slug) {
 }
 
 // POST
-
 export async function getAllPostsWithSlugs() {
   const data = await fetchAPI(`
   {
