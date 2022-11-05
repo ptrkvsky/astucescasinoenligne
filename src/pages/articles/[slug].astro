@@ -9,7 +9,6 @@ import '../../assets/css/article.css';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
-  // console.dir(postsWithSlugs, { depth: null });
   return postsWithSlugs.edges.map(({ node }) => {
     return {
       params: { slug: node.slug },
@@ -21,7 +20,7 @@ const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
 const content = post.content
   .replace('http://astrowp.local', `https://www.piscine-nice.com/articles`)
-  .replace('astrowp.local', 'piscine-nice.com')
+  .replace('astrowp.local', 'piscine-nice.com/articles')
   .replace('http://', 'https://');
 
 const schema = JSON.stringify(post.seo.schema.raw).replace(
