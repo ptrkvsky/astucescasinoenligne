@@ -49,7 +49,7 @@ export async function getPageBySlug(slug) {
 export async function getAllPostsWithSlugs() {
   const data = await fetchAPI(`
   {
-    posts(where: {status: PUBLISH}) {
+    posts(where: {status: PUBLISH} first:1000) {
       edges {
         node {
           slug
