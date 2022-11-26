@@ -5,6 +5,7 @@ import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
+import config from '../../config';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
@@ -27,10 +28,7 @@ const schema = JSON.stringify(post?.seo?.schema?.raw);
     <script type="application/ld+json" set:html={JSON.parse(schema)}></script>
     <title>{post.seo.title}</title>
     <meta name="description" content={post.seo.metaDesc} />
-    <link
-      rel="canonical"
-      href={`https://www.piscine-nice.com/articles/${post.slug}`}
-    />
+    <link rel="canonical" href={`${config.url}/articles/${post.slug}`} />
     <meta name="viewport" content="width=device-width" />
     <!-- GOOGLE FONTS -->
     <link

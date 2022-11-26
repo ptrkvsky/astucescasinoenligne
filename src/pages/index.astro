@@ -15,6 +15,7 @@ import { Image } from '@astrojs/image/components';
 import imageBlog from '../assets/images/bg_home.webp';
 
 import { getAllPostsWithSlugs } from '../lib/api';
+import config from '../config';
 
 const postsWithSlugs = await getAllPostsWithSlugs();
 ---
@@ -30,13 +31,14 @@ const postsWithSlugs = await getAllPostsWithSlugs();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <title>
-      Astuces Casino en Ligne - Informations et conseils pour votre piscine
+      Astuces Casino en Ligne - Nos meilleurs conseils pour tout comprendre sur
+      l'univers du Casino.
     </title>
     <meta
       name="description"
-      content="Piscine Nice c'est votre blog spécialisé pour tout savoir sur l'entretien de votre piscine en 2022"
+      content="Apprenez les secrets des initiés pour gagner aux jeux de casino grâce à notre équipe d'experts. Nous vous apprendrons à déjouer les pronostics et à devenir un pro du casino."
     />
-    <link rel="canonical" href="https://www.piscine-nice.com/" />
+    <link rel="canonical" href={config.url} />
   </head>
   <body>
     <Header />
