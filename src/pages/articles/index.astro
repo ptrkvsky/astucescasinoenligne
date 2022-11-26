@@ -1,7 +1,7 @@
 ---
 import { getAllPostsListing } from '../../lib/api';
 import Header from '../../components/Header.astro';
-import '../../assets/css/bootstrap.min.css';
+// import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/font-awesome.min.css';
 import '../../assets/css/flaticon.css';
 import '../../assets/css/payment-webfont.css';
@@ -12,8 +12,10 @@ import '../../assets/css/animate.css';
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
+import config from '../../config';
 
 const posts = await getAllPostsListing();
+console.log(posts);
 ---
 
 <meta charset="utf-8" />
@@ -24,7 +26,7 @@ const posts = await getAllPostsListing();
   name="description"
   content="Piscine Nice vous présente ses meilleurs articles sur l'entretien de votre piscine. Découvrez des guides complets pour une eau toujours plus propre."
 />
-<link rel="canonical" href="https://www.piscine-nice.com/articles" />
+<link rel="canonical" href={`${config.url}/articles`} />
 
 <body>
   <Header />
@@ -34,30 +36,31 @@ const posts = await getAllPostsListing();
       <div class="row">
         <!-- BLOG POSTS HOLDER -->
         <div class="col-md-12">
-          <h1>Articles pour l'entretien de votre piscine</h1>
+          <h1>Nos guides complets pour le</h1>
           <p>
             Retrouvez des articles et des guides complets écrit par des
             proffessionnels de la piscine.
           </p>
           <div class="posts-holder p-right-60">
             {
-              posts.edges.map(({ node }) => {
-                return node.status === 'publish' ? (
-                  <div class="blog-post">
-                    <div class="blog-post-txt m-bottom-10">
-                      <span>
-                        {new Date(node.date).toLocaleDateString('fr')}
-                      </span>
+              posts &&
+                posts?.edges.map(({ node }) => {
+                  return node.status === 'publish' ? (
+                    <div class="blog-post">
+                      <div class="blog-post-txt m-bottom-10">
+                        <span>
+                          {new Date(node.date).toLocaleDateString('fr')}
+                        </span>
 
-                      <a href={`/articles/${node.slug}`}>
-                        <h2 class="h4-lg">{node.title}</h2>
-                      </a>
-                      <div set:html={node.excerpt} />
+                        <a href={`/articles/${node.slug}/`}>
+                          <h2 class="h4-lg">{node.title}</h2>
+                        </a>
+                        <div set:html={node.excerpt} />
+                      </div>
+                      <hr />
                     </div>
-                    <hr />
-                  </div>
-                ) : null;
-              })
+                  ) : null;
+                })
             }
           </div>
         </div>

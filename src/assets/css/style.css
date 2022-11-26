@@ -12,12 +12,20 @@
 :root {
   --title: Futura, Poppins, -apple-system, BlinkMacSystemFont, Roboto,
     Arial Black, Arial Bold, Arial, sans-serif;
-  --dark-blue: #093e7d;
-  --light-blue: #093e7d;
+  --dark-primary: #ca171d;
+  --light-primary: #b50029;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
 }
 
 a {
-  color: var(--light-blue);
+  color: var(--light-primary);
 }
 
 h1,
@@ -26,7 +34,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--dark-blue);
+  color: var(--dark-primary);
 }
 
 /* ===========================================================================
@@ -688,9 +696,8 @@ p.p-lg {
 /*------------------------------------------*/
 
 ul {
-  margin: 0;
+  margin: 0 0 0 15px;
   padding: 0;
-  list-style: none;
 }
 
 /*------------------------------------------*/
@@ -1701,7 +1708,7 @@ span.section-id {
   margin-right: 1rem;
   font-size: 1.25rem;
   font-family: var(--title);
-  color: var(--dark-blue) !important;
+  color: var(--dark-primary) !important;
   text-transform: uppercase;
   font-weight: bolder;
   letter-spacing: 1.2px;
@@ -1745,7 +1752,6 @@ span.section-id {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  color: #64787d !important;
 }
 
 .dropdown-item {
@@ -2116,8 +2122,10 @@ span.section-id {
   background-image: url(../images/hero-14.jpg);
 }
 
-#hero-15 {
-  background-image: url('../images/bg_home.webp');
+@media all and (min-width: 900px) {
+  #hero-15 {
+    background-image: url('../images/bg_home.webp');
+  }
 }
 
 #hero-16 {
@@ -4214,8 +4222,8 @@ p.p-hero-medium {
    =========================================================================== */
 
 #blog-page {
-  margin-top: 160px;
-  margin-bottom: 100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 #single-post-page {

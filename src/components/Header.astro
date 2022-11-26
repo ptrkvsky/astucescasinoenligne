@@ -1,16 +1,16 @@
 ---
-import logo from '../assets/images/piscine-nice-logo.jpg';
+import logo from '../assets/images/logo.webp';
 import { Image } from '@astrojs/image/components';
 import config from '../config';
 ---
 
 <header id="header" class="header">
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg">
     <div class="container">
       <!-- LOGO IMAGE -->
 
       <a href="/" class="navbar-brand logo-black"
-        ><Image height="50" alt="lgoo" src={logo} /> Piscine Nice
+        ><Image alt={config.siteName} src={logo} />
       </a>
       <!-- Responsive Menu Button -->
 
@@ -19,7 +19,14 @@ import config from '../config';
         <a href="#single-post-page" class="navbar-brand"> </a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/articles">Articles</a>
+            <a class="nav-link" href="/articles/guide-blackjack">Blackjack</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/categorie/poker">Poker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/categorie/comment-jouer">Comment jouer</a
+            >
           </li>
 
           <!-- Dropdown Link 
@@ -59,3 +66,43 @@ import config from '../config';
   <!-- End navbar  -->
 </header>
 <!-- END HEADER -->
+
+<style lang="css" is:global>
+  header {
+    background-color: #ca171d;
+    height: 100%;
+  }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  @media all and (max-width: 900px) {
+    header .container {
+      flex-direction: column;
+    }
+  }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    color: #fff;
+  }
+
+  .navbar-nav {
+    margin-left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    text-align: center;
+  }
+  @media all and (max-width: 900px) {
+    .navbar-nav {
+      width: 100%;
+      display: block;
+    }
+    .navbar-nav li {
+      display: inline-block;
+    }
+    .navbar-nav li a {
+      padding: 7px;
+    }
+  }
+</style>

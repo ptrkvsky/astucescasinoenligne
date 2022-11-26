@@ -2,7 +2,6 @@
 import { getAllPostsWithSlugs, getPostBySlug } from '../../lib/api';
 import Header from '../../components/Header.astro';
 import '../../assets/css/bootstrap.min.css';
-
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
@@ -18,18 +17,8 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
-const content = post.content
-  .replace('http://astrowp.local', `https://www.piscine-nice.com/articles`)
-  .replace('astrowp.local', 'piscine-nice.com/articles')
-  .replace('http://', 'https://')
-  .replace('http://astrowp.local', `https://www.piscine-nice.com/articles`)
-  .replace('astrowp.local', 'piscine-nice.com/articles')
-  .replace('http://', 'https://');
-
-const schema = JSON.stringify(post.seo.schema.raw).replace(
-  'http://astrowp.local',
-  `https://www.piscine-nice.com`
-);
+const content = post.content || '';
+const schema = JSON.stringify(post?.seo?.schema?.raw);
 ---
 
 <html lang="fr">
@@ -56,21 +45,13 @@ const schema = JSON.stringify(post.seo.schema.raw).replace(
   <body>
     <Header />
     <div class="flex flex-col p-10">
-      <div class="mb-5 text-4xl font-bold">{post.title}</div>
       <div id="single-post-page" class="single-post-section division">
         <div class="container">
           <div class="row">
             <!-- SINGLE POST -->
             <div class="col-md-12">
               <h1>{post.title}</h1>
-              <article
-                class="prose lg:prose-xl"
-                set:html={content.replace(
-                  'http://astrowp.local',
-                  `https://www.piscine-nice.com/articles`
-                )}
-              >
-              </article>
+              <article class="prose lg:prose-xl" set:html={content}></article>
             </div>
           </div>
         </div>

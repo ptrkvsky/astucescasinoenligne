@@ -1,0 +1,83 @@
+---
+import {
+  getAllCategoriesWithSlugs,
+  getAllPostsListing,
+  getAllPostsListingByCategory,
+} from '../../lib/api';
+import Header from '../../components/Header.astro';
+// import '../../assets/css/bootstrap.min.css';
+import '../../assets/css/font-awesome.min.css';
+import '../../assets/css/flaticon.css';
+import '../../assets/css/payment-webfont.css';
+import '../../assets/css/flexslider.css';
+import '../../assets/css/slick.css';
+import '../../assets/css/slick-theme.css';
+import '../../assets/css/animate.css';
+import '../../assets/css/style.css';
+import '../../assets/css/responsive.css';
+import '../../assets/css/article.css';
+import config from '../../config';
+
+export async function getStaticPaths() {
+  const postsWithSlugs = await getAllCategoriesWithSlugs();
+  return postsWithSlugs.edges.map(({ node }) => {
+    return {
+      params: { slug: node.slug },
+    };
+  });
+}
+
+const { slug } = Astro.params;
+const posts = await getAllPostsListingByCategory(slug);
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="viewport" content="width=device-width" />
+<title>Articles et conseils sur les casinos et le monde du jeu</title>
+<meta
+  name="description"
+  content="Astuces Casino en Ligne vous présente ses meilleurs articles pour découvrir l'univers du casino en ligne."
+/>
+<link rel="canonical" href={`${config.url}/categorie/${slug}`} />
+
+<body>
+  <Header />
+
+  <div id="blog-page" class="blog-page-section division">
+    <div class="container">
+      <div class="row">
+        <!-- BLOG POSTS HOLDER -->
+        <div class="col-md-12">
+          <h1>Nos guides complets</h1>
+          <p>
+            Retrouvez des articles et des guides complets écrit par des
+            passionés du casino.
+          </p>
+          <div class="posts-holder p-right-60">
+            {
+              posts &&
+                posts?.edges?.map(({ node }) => {
+                  return node.status === 'publish' ? (
+                    <div class="blog-post">
+                      <div class="blog-post-txt m-bottom-10">
+                        <span>
+                          {new Date(node.date).toLocaleDateString('fr')}
+                        </span>
+
+                        <a href={`/articles/${node.slug}/`}>
+                          <h2 class="h4-lg">{node.title}</h2>
+                        </a>
+                        <div set:html={node.excerpt} />
+                      </div>
+                      <hr />
+                    </div>
+                  ) : null;
+                })
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

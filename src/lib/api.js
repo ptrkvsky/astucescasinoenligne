@@ -1,20 +1,27 @@
 const API_URL = import.meta.env.WP_URL;
 
 async function fetchAPI(query, { variables } = {}) {
+  if (!API_URL) return;
   const headers = { 'Content-Type': 'application/json' };
+
   const res = await fetch(API_URL, {
     method: 'POST',
     headers,
     body: JSON.stringify({ query, variables }),
   });
 
-  const json = await res.json();
-  if (json.errors) {
-    console.log(json.errors);
-    throw new Error('Failed to fetch API');
-  }
+  try {
+    const json = await res.json();
 
-  return json.data;
+    if (json.errors) {
+      console.log(json.errors);
+      throw new Error('Failed to fetch API');
+    }
+
+    return json.data;
+  } catch (error) {
+    console.error('🀄 fetchAPI', error, query);
+  }
 }
 
 export async function getAllPagesWithSlugs() {
@@ -44,9 +51,32 @@ export async function getPageBySlug(slug) {
   return data?.page;
 }
 
+// CATEGORY
+export async function getAllCategoriesWithSlugs() {
+  const request = `
+  {
+    categories {
+      edges {
+        node {
+          slug
+        }
+      }
+    }
+  }
+  `;
+  try {
+    const data = await fetchAPI(request);
+
+    return data?.categories;
+  } catch (error) {
+    console.error('👨‍🚒 getAllPostsWithSlugs', error);
+    console.error('👨‍🚒 getAllPostsWithSlugs', request);
+  }
+}
+
 // POST
 export async function getAllPostsWithSlugs() {
-  const data = await fetchAPI(`
+  const request = `
   {
     posts(where: {status: PUBLISH} first:1000) {
       edges {
@@ -56,9 +86,15 @@ export async function getAllPostsWithSlugs() {
       }
     }
   }
-  `);
+  `;
+  try {
+    const data = await fetchAPI(request);
 
-  return data?.posts;
+    return data?.posts;
+  } catch (error) {
+    console.error('👨‍🚒 getAllPostsWithSlugs', error);
+    console.error('👨‍🚒 getAllPostsWithSlugs', request);
+  }
 }
 
 export async function getAllPostsListing() {
@@ -89,22 +125,55 @@ export async function getAllPostsListing() {
   return data?.posts;
 }
 
-export async function getPostBySlug(slug) {
+export async function getAllPostsListingByCategory(slug) {
   const data = await fetchAPI(`
   {
-    post(id: "${slug}", idType: URI) {
-      title
-      slug
-      content
-      seo {
-        title
-        metaDesc
-        schema {
-          raw
+    posts(first: 10000, where: {categoryName: "${slug}", status: PUBLISH}) {
+      edges {
+        node {
+          status
+          featuredImage{ 
+          	node {
+              altText
+              srcSet
+            	link
+            }
+          }
+          title
+          date
+          link
+          excerpt
+          slug
         }
       }
     }
   }
   `);
-  return data?.post;
+
+  return data?.posts;
+}
+
+export async function getPostBySlug(slug) {
+  try {
+    const request = `
+    {
+      post(id: "${slug}", idType: SLUG) {
+        title
+        slug
+        content
+        seo {
+          title
+          metaDesc
+          schema {
+            raw
+          }
+        }
+      }
+    }
+    `;
+    const data = await fetchAPI(request);
+    return data?.post;
+  } catch (error) {
+    console.errror('🔥 getPostBySlug', error);
+  }
 }
