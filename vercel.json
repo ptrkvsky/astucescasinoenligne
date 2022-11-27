@@ -1,0 +1,64 @@
+{
+  "redirects": [
+    {
+      "source": "/jeu-rigolo-casino.html",
+      "destination": "https://astucescasinoenligne.com/articles/jeu-rigolo-casino",
+      "statusCode": 301
+    },
+    {
+      "source": "/casinos.html",
+      "destination": "https://astucescasinoenligne.com/categorie/casinos",
+      "statusCode": 301
+    },
+    {
+      "source": "/retrait-bitcasino.html",
+      "destination": "https://astucescasinoenligne.com/articles/retrait-bitcasino",
+      "statusCode": 301
+    },
+    {
+      "source": "/casino-pour-francais.html",
+      "destination": "https://astucescasinoenligne.com/articles/casino-pour-francais",
+      "statusCode": 301
+    },
+    {
+      "source": "/variantes-blackjack.html",
+      "destination": "https://astucescasinoenligne.com/articles/variantes-blackjack",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact",
+      "destination": "https://astucescasinoenligne.com",
+      "statusCode": 301
+    },
+    {
+      "source": "/casino-fr-debutant.html",
+      "destination": "https://astucescasinoenligne.com/articles/casino-fr-debutant",
+      "statusCode": 301
+    },
+    {
+      "source": "/jeu-rigolo-casino.html",
+      "destination": "https://astucescasinoenligne.com/articles/jeu-rigolo-casino",
+      "statusCode": 301
+    },
+    {
+      "source": "/regles-blackjack.html",
+      "destination": "https://astucescasinoenligne.com/articles/regles-blackjack",
+      "statusCode": 301
+    },
+    {
+      "source": "/retrait-bitcasino.html",
+      "destination": "https://astucescasinoenligne.com/categorie/casinos",
+      "statusCode": 301
+    },
+    {
+      "source": "/retrait-bitcasino.html",
+      "destination": "https://astucescasinoenligne.com/categorie/casinos",
+      "statusCode": 301
+    },
+    {
+      "source": "/retrait-bitcasino.html",
+      "destination": "https://astucescasinoenligne.com/categorie/casinos",
+      "statusCode": 301
+    }
+  ]
+}
