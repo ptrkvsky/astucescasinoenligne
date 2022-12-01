@@ -59,6 +59,16 @@
       "source": "/retrait-bitcasino.html",
       "destination": "https://astucescasinoenligne.com/categorie/casinos",
       "statusCode": 301
+    },
+    {
+      "source": "/arlequin.html",
+      "destination": "https://astucescasinoenligne.com/articles/arlequin",
+      "statusCode": 301
+    },
+    {
+      "source": "/guide-blackjack.html",
+      "destination": "https://astucescasinoenligne.com/articles/guide-blackjack",
+      "statusCode": 301
     }
   ]
 }
