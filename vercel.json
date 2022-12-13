@@ -31,6 +31,12 @@
       "statusCode": 301
     },
     {
+      "source": "/rummy-rum-comment-jouer.html",
+      "destination": "https://astucescasinoenligne.com/articles/rummy-rum-comment-jouer/",
+      "statusCode": 301
+    },
+
+    {
       "source": "/casino-fr-debutant.html",
       "destination": "https://astucescasinoenligne.com/articles/casino-fr-debutant",
       "statusCode": 301
