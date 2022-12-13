@@ -48,7 +48,7 @@ const posts = await getAllPostsListingByCategory(slug);
     <div class="container">
       <div class="row">
         <!-- BLOG POSTS HOLDER -->
-        <div class="col-md-12">
+        <div class="wrapper">
           <h1>Nos guides complets</h1>
           <p>
             Retrouvez des articles et des guides complets écrit par des
@@ -80,4 +80,11 @@ const posts = await getAllPostsListingByCategory(slug);
       </div>
     </div>
   </div>
+  <style>
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5px;
+    }
+  </style>
 </body>
