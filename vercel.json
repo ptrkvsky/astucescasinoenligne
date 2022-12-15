@@ -21,6 +21,11 @@
       "statusCode": 301
     },
     {
+      "source": "/comment-jouer-legalement-en-ligne-en-france",
+      "destination": "https://www.astucescasinoenligne.com/articles/comment-jouer-legalement-au-casino-en-france",
+      "statusCode": 301
+    },
+    {
       "source": "/variantes-blackjack.html",
       "destination": "https://astucescasinoenligne.com/articles/variantes-blackjack",
       "statusCode": 301
