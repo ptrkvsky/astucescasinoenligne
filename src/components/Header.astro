@@ -1,7 +1,7 @@
 ---
 import logo from '../assets/images/logo.webp';
 import { Image } from '@astrojs/image/components';
-import config from '../config';
+import {seoConfig} from '../utils/seoConfig';
 ---
 
 <header id="header" class="header">
@@ -10,7 +10,7 @@ import config from '../config';
       <!-- LOGO IMAGE -->
 
       <a href="/" class="navbar-brand logo-black"
-        ><Image alt={config.siteName} src={logo} />
+        ><Image alt={seoConfig.siteName} src={logo} />
       </a>
       <!-- Responsive Menu Button -->
 

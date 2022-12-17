@@ -5,7 +5,8 @@ import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
-import config from '../../config';
+import { seoConfig } from '../../utils/seoConfig';
+import LayoutPrimary from '../../components/LayoutPrimary.astro';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
@@ -22,26 +23,13 @@ const content = post.content || '';
 const schema = JSON.stringify(post?.seo?.schema?.raw);
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <script type="application/ld+json" set:html={JSON.parse(schema)}></script>
-    <title>{post.seo.title}</title>
-    <meta name="description" content={post.seo.metaDesc} />
-    <link rel="canonical" href={`${config.url}/articles/${post.slug}`} />
-    <meta name="viewport" content="width=device-width" />
-    <!-- GOOGLE FONTS -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,900"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,800"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <Header />
+<LayoutPrimary
+  title={post.seo.title}
+  description={post.seo.metaDesc}
+  canonical={`${seoConfig.baseURL}/articles/${post.slug}`}
+  schema={post?.seo?.schema?.raw}
+>
+  <div slot="main">
     <div class="flex flex-col p-10">
       <div id="single-post-page" class="single-post-section division">
         <div class="container">
@@ -57,9 +45,18 @@ const schema = JSON.stringify(post?.seo?.schema?.raw);
     </div>
 
     <style is:global>
-      figure {
+      .toc_list {
+        font-size: 16px;
+        color: #0002eb;
+      }
+
+      .toc_list li {
+        margin-bottom: 0;
+      }
+      figure,
+      iframe {
         max-width: 100% !important;
       }
     </style>
-  </body>
-</html>
+  </div>
+</LayoutPrimary>

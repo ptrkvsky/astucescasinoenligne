@@ -1,22 +1,15 @@
 ---
 import {
   getAllCategoriesWithSlugs,
-  getAllPostsListing,
+  
   getAllPostsListingByCategory,
 } from '../../lib/api';
 import Header from '../../components/Header.astro';
-// import '../../assets/css/bootstrap.min.css';
-import '../../assets/css/font-awesome.min.css';
-import '../../assets/css/flaticon.css';
-import '../../assets/css/payment-webfont.css';
-import '../../assets/css/flexslider.css';
-import '../../assets/css/slick.css';
-import '../../assets/css/slick-theme.css';
-import '../../assets/css/animate.css';
-import '../../assets/css/style.css';
-import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
-import config from '../../config';
+// import '../../assets/css/bootstrap.min.css';
+
+import LayoutPrimary from '../../components/LayoutPrimary.astro';
+import { seoConfig } from '../../utils/seoConfig';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllCategoriesWithSlugs();
@@ -31,20 +24,12 @@ const { slug } = Astro.params;
 const posts = await getAllPostsListingByCategory(slug);
 ---
 
-<meta charset="utf-8" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="viewport" content="width=device-width" />
-<title>Articles et conseils sur les casinos et le monde du jeu</title>
-<meta
-  name="description"
-  content="Astuces Casino en Ligne vous présente ses meilleurs articles pour découvrir l'univers du casino en ligne."
-/>
-<link rel="canonical" href={`${config.url}/categorie/${slug}`} />
-
-<body>
-  <Header />
-
-  <div id="blog-page" class="blog-page-section division">
+<LayoutPrimary
+  canonical={`${seoConfig.baseURL}/categorie/${slug}`}
+  description="Astuces Casino en Ligne vous présente ses meilleurs articles pour découvrir l'univers du casino en ligne."
+  title={'Articles et conseils sur les casinos et le monde du jeu'}
+>
+  <div slot="main" id="blog-page" class="blog-page-section division">
     <div class="container">
       <div class="row">
         <!-- BLOG POSTS HOLDER -->
@@ -65,7 +50,7 @@ const posts = await getAllPostsListingByCategory(slug);
                           {new Date(node.date).toLocaleDateString('fr')}
                         </span>
 
-                        <a href={`/articles/${node.slug}/`}>
+                        <a href={`/articles/${node.slug}`}>
                           <h2 class="h4-lg">{node.title}</h2>
                         </a>
                         <div set:html={node.excerpt} />
@@ -87,4 +72,4 @@ const posts = await getAllPostsListingByCategory(slug);
       padding: 0 5px;
     }
   </style>
-</body>
+</LayoutPrimary>

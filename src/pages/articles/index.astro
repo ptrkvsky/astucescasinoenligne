@@ -1,37 +1,19 @@
 ---
 import { getAllPostsListing } from '../../lib/api';
-import Header from '../../components/Header.astro';
-// import '../../assets/css/bootstrap.min.css';
-import '../../assets/css/font-awesome.min.css';
-import '../../assets/css/flaticon.css';
-import '../../assets/css/payment-webfont.css';
-import '../../assets/css/flexslider.css';
-import '../../assets/css/slick.css';
-import '../../assets/css/slick-theme.css';
-import '../../assets/css/animate.css';
-import '../../assets/css/style.css';
-import '../../assets/css/responsive.css';
-import '../../assets/css/article.css';
-import config from '../../config';
+
+import { seoConfig } from '../../utils/seoConfig';
+
+import LayoutPrimary from '../../components/LayoutPrimary.astro';
 
 const posts = await getAllPostsListing();
-console.log(posts);
 ---
 
-<meta charset="utf-8" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="viewport" content="width=device-width" />
-<title>Articles et conseils pour tout comprendre au Casino</title>
-<meta
-  name="description"
-  content="Blackjack, poker, roulette, découvrez tous les trucs et astuces pour bien jouer au Casino."
-/>
-<link rel="canonical" href={`${config.url}/articles`} />
-
-<body>
-  <Header />
-
-  <div id="blog-page" class="blog-page-section division">
+<LayoutPrimary
+  description={'Blackjack, poker, roulette, découvrez tous les trucs et astuces pour bien jouer au Casino.'}
+  canonical={`${seoConfig.baseURL}/articles`}
+  title="Articles et conseils pour tout comprendre au Casino"
+>
+  <div slot="main" id="blog-page" class="blog-page-section division">
     <div class="container">
       <div class="row">
         <!-- BLOG POSTS HOLDER -->
@@ -51,11 +33,9 @@ console.log(posts);
                         <span>
                           {new Date(node.date).toLocaleDateString('fr')}
                         </span>
-
-                        <a href={`/articles/${node.slug}/`}>
+                        <a href={`/articles/${node.slug}`}>
                           <h2 class="h4-lg">{node.title}</h2>
                         </a>
-                        <div set:html={node.excerpt} />
                       </div>
                       <hr />
                     </div>
@@ -67,4 +47,4 @@ console.log(posts);
       </div>
     </div>
   </div>
-</body>
+</LayoutPrimary>

@@ -1,0 +1,52 @@
+---
+import Header from '../components/Header.astro';
+import '../assets/css/bootstrap.min.css';
+import '../assets/css/style.css';
+import '../assets/css/responsive.css';
+import '../assets/css/article.css';
+
+import Favicons from './Favicons.astro';
+
+
+const { title, schema, description, image, canonical } = Astro.props;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="jungleup" content="ed238befefc41b3e8840277869cc1c67" />
+    {image && <meta property="og:image" content={image} />}
+    {
+      schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
+    <Favicons />
+
+	  <!-- Service worker registration. -->
+		<script is:inline src="/registerSW.js"></script>
+		<link rel="manifest" href="/manifest.webmanifest" />
+  </head>
+  <body>
+    <slot name="before-main" />
+
+    <Header />
+    <div id="page" class="page">
+      <main>
+        <slot name="main" />
+      </main>
+    </div>
+
+    <style is:global>
+      iframe,
+      figure {
+        max-width: 100% !important;
+      }
+    </style>
+  </body>
+</html>

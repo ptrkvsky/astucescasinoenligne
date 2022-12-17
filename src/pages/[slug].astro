@@ -1,6 +1,7 @@
 ---
 import { getAllPagesWithSlugs, getPageBySlug } from '../lib/api';
 import Header from '../components/Header.astro';
+import LayoutPrimary from '../components/LayoutPrimary.astro';
 
 export async function getStaticPaths() {
   const pagesWithSlugs = await getAllPagesWithSlugs();
@@ -34,36 +35,20 @@ const { slug } = Astro.params;
 const page = await getPageBySlug(slug);
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>{page.title}</title>
-    <meta name="viewport" content="width=device-width" />
-    <!-- GOOGLE FONTS -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,900"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,800"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <Header />
-    <div class="flex flex-col p-10">
-      <div class="mb-5 text-4xl font-bold">{page.title}</div>
-      <div id="single-post-page" class="single-post-section division">
-        <div class="container">
-          <div class="row">
-            <!-- SINGLE POST -->
-            <div class="col-md-12">
-              <article class="prose lg:prose-xl" set:html={page.content}>
-              </article>
-            </div>
+<LayoutPrimary title={page.title}>
+  <Header />
+  <div class="flex flex-col p-10">
+    <div class="mb-5 text-4xl font-bold">{page.title}</div>
+    <div id="single-post-page" class="single-post-section division">
+      <div class="container">
+        <div class="row">
+          <!-- SINGLE POST -->
+          <div class="col-md-12">
+            <article class="prose lg:prose-xl" set:html={page.content}>
+            </article>
           </div>
         </div>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+</LayoutPrimary>
