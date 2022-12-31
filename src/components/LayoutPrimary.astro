@@ -1,6 +1,6 @@
 ---
 import Header from '../components/Header.astro';
-import '../assets/css/bootstrap.min.css';
+// import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
 import '../assets/css/article.css';
@@ -8,7 +8,7 @@ import '../assets/css/article.css';
 import Favicons from './Favicons.astro';
 
 
-const { title, schema, description, image, canonical } = Astro.props;
+const { title, schema, description, image, canonical, headerBackground } = Astro.props;
 ---
 
 <html lang="fr">
@@ -35,7 +35,7 @@ const { title, schema, description, image, canonical } = Astro.props;
   <body>
     <slot name="before-main" />
 
-    <Header />
+    <Header headerBackground={headerBackground} />
     <div id="page" class="page">
       <main>
         <slot name="main" />
@@ -47,6 +47,38 @@ const { title, schema, description, image, canonical } = Astro.props;
       figure {
         max-width: 100% !important;
       }
+
+      @font-face {
+        font-family: 'Didone';
+        src: url('/fonts/didone_variable.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Montreal';
+        src: url('/fonts/montreal.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      h1 {
+        background: -webkit-linear-gradient(-323deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #e10061;
+    }
+
     </style>
   </body>
 </html>

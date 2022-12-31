@@ -1,12 +1,16 @@
 ---
-import { getAllPostsWithSlugs, getPostBySlug } from '../../lib/api';
-import Header from '../../components/Header.astro';
-import '../../assets/css/bootstrap.min.css';
+import { getAllPostsListingByCategory, getAllPostsWithSlugs, getPostBySlug } from '../../lib/api';
+//import '../../assets/css/bootstrap.min.css';
 import '../../assets/css/style.css';
 import '../../assets/css/responsive.css';
 import '../../assets/css/article.css';
 import { seoConfig } from '../../utils/seoConfig';
 import LayoutPrimary from '../../components/LayoutPrimary.astro';
+import { Image } from '@astrojs/image/components';
+import star from "../../assets/images/star.svg"
+import ImageStar from '../../components/ImageStar.astro';
+import WrapperRating from '../../components/WrapperRating.astro';
+import SectionProsCons from '../../components/SectionProsCons.astro';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
@@ -20,7 +24,13 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
 const content = post.content || '';
-const schema = JSON.stringify(post?.seo?.schema?.raw);
+// const schema = JSON.stringify(post?.seo?.schema?.raw);
+const postsRelated = await getAllPostsListingByCategory(post.categories.nodes[0].slug);
+const banner = post?.post?.banniere?.mediaItemUrl
+const mainColor = post?.post?.headerBackground
+const pros = post?.post?.pros
+const cons = post?.post?.cons
+
 ---
 
 <LayoutPrimary
@@ -28,35 +38,226 @@ const schema = JSON.stringify(post?.seo?.schema?.raw);
   description={post.seo.metaDesc}
   canonical={`${seoConfig.baseURL}/articles/${post.slug}`}
   schema={post?.seo?.schema?.raw}
+  headerBackground={mainColor}
 >
-  <div slot="main">
-    <div class="flex flex-col p-10">
-      <div id="single-post-page" class="single-post-section division">
-        <div class="container">
-          <div class="row">
-            <!-- SINGLE POST -->
-            <div class="col-md-12">
-              <h1>{post.title}</h1>
-              <article class="prose lg:prose-xl" set:html={content}></article>
-            </div>
-          </div>
-        </div>
+
+  <div class={`wrapper-main ${!banner && "mtop"}`} slot="main">
+  
+    {banner && 
+    <div class="wrapper-banner"> 
+      <Image format="avif" fit="cover" loading="lazy" alt="article" width={2048} height={414} src={banner} />
+    </div>
+    }
+    <div >
+      <div class={`wrapper-h1 ${banner && "has-banner"}`}>
+        <h1>{post.title}</h1>
+        {pros?.note && <WrapperRating note={pros.note} mainColor={mainColor} />}
       </div>
     </div>
+    {pros?.length > 0 && cons?.length > 0 && <SectionProsCons pros={pros} cons={cons} />}
+    <div class="wrapper-content">
+      <article class="prose lg:prose-xl" set:html={content}></article>
+      <section class="col-md-12">
+        <h2>Vous pourriez aussi aimer</h2>
+        <ul>
+        {postsRelated?.edges.map((edge) => {
+          return <li><a href={`/articles/${edge?.node?.slug}`}>{edge?.node?.title}</a><br /></li>
+        })}
+        </ul>
+      </section>
+    </div>
 
-    <style is:global>
-      .toc_list {
-        font-size: 16px;
-        color: #0002eb;
-      }
-
-      .toc_list li {
-        margin-bottom: 0;
-      }
-      figure,
-      iframe {
-        max-width: 100% !important;
-      }
-    </style>
+    
   </div>
 </LayoutPrimary>
+
+<style lang="scss" is:global>
+
+  p.video { 
+    overflow:hidden; 
+    padding-bottom:56.25%; 
+    position:relative; 
+    height:0;
+  }
+    
+  iframe {
+    left:0; 
+    color: red;
+    top:0; 
+    height:100%;
+    width:100%;
+    position:absolute;
+  }
+
+  .wrapper-banner {
+    text-align: center;
+  }
+
+  .mtop{
+    padding-top: 24px;
+  }
+  .wrapper-h1 {
+    position: relative;
+    z-index: 10;
+    background: #FFF;
+    max-width: 1024PX;
+    margin: 0 auto;
+    border-radius: 55px;
+
+    padding: 56px 0 48px;
+    &.has-banner {
+      margin-top: -83px;
+    }
+
+    h1 {
+      font-size: 5.4rem;
+      text-align: center;
+      @media (max-width:900px) {
+        font-size: 48px;
+      }
+    }
+  }
+
+  @media all and (min-width: 900px) {
+    .wrapper-h1 h1 {
+      font-size: 48px;
+      padding: 0 8px;
+    }
+  }
+
+  .wrapper-content {
+    margin: 0 auto;
+    padding: 32px 48px;
+    margin-top: 32px;
+    border-radius: 55px;
+    background: #FFF;
+    max-width: 1024px;
+
+    article > p {
+      margin-top: 1em;
+    }
+
+    @media (max-width:900px) {
+      padding: 16px 24px;
+    }
+
+    figure {
+      width: auto;
+    }
+
+    figcaption {
+      text-align: center;
+      font-style: italic;
+    }
+
+    a {
+      background-image: var(--main-gradient);
+      background-position: 0 100%;
+      background-repeat: repeat-x;
+      background-size: 100% 2px;
+      transition: background-size .3s;
+    }
+
+    .size-large {
+      border-radius: 24px;
+    }
+
+    p, ul, li {
+      font-size: 24px;
+      line-height: 1.4;
+      color: #330b4f;
+      margin: 1.5em 0;
+
+      @media (max-width:900px) {
+        font-size: 18px;
+      }
+
+      
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    .toc_title {
+      @media (max-width: 900px) {
+        font-size: 24px;
+
+      }
+    }
+
+    .toc_list {
+      border: 3px solid #38176c;
+      border-radius: 24px;
+      margin: 0;
+      padding: 16px;
+
+      @media (max-width: 900px) {
+        padding: 8px;
+      }
+      li {
+        margin:0.3em;
+        a{
+          color: var(--body-color);
+          text-decoration: none;
+          background: none;
+          font-size: 18px;
+        }
+        &::before{
+          margin-right: 8px;
+        }
+      }
+      ul {
+        margin:0 1em;
+      }
+    }
+
+    li:before {
+      background: var(--light-primary);
+      border-radius: 100%;
+      content: "";
+      display: inline-block;
+      margin-right: 18px;
+      max-height: 20px;
+      max-width: 20px;
+      min-height: 20px;
+      min-width: 20px;
+
+      @media (max-width:900px) {
+      margin-right: 8px;
+
+        max-height: 8px;
+      max-width: 8px;
+      min-height: 8px;
+      min-width: 8px;
+      }
+    }
+  }
+
+  .wrapper-main {
+    background-color: var(--light-background);
+    @media (max-width:900px) {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+  }
+  .toc_list {
+    font-size: 16px;
+    color: #0002eb;
+  }
+
+  header {
+    background: #fd4402;
+  }
+
+  .toc_list li {
+    margin-bottom: 0;
+  }
+  figure,
+  iframe {
+    max-width: 100% !important;
+  }
+
+
+</style>

@@ -1,0 +1,52 @@
+---
+import ImageStar from "./ImageStar.astro";
+const { mainColor, note } = Astro.props;
+
+
+---
+
+<div class="wrapper-rating">
+  <div class="wrapper-stars">
+  <ImageStar />
+  <ImageStar />
+  <ImageStar />
+  <ImageStar />
+  <ImageStar />
+  </div>
+  <span class="note">
+  {note}/5
+</span>
+</div>
+
+<style define:vars={{mainColor}} lang="scss" is:global>
+.wrapper-rating {
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: 24px;
+    height: auto;
+    path {
+    fill: var(--mainColor)
+  }}
+
+  .note {
+    font-family: var(--title);
+    background: #4502fd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    color: #FFF;
+
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+
+</style>

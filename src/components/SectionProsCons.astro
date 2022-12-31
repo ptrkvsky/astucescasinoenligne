@@ -1,0 +1,53 @@
+---
+const {pros,cons} = Astro.props
+---
+
+
+<div class="wrapper-pros-cons">
+  <div class="avantage">
+    <h2>Avantages</h2>
+    <ul> 
+      {pros?.map(pro => <li>{pro.proItem}</li>)}
+    </ul>
+  </div>
+  <div>
+    <h2>Inconvénients</h2>
+    <ul> 
+      {cons?.map(con => <li>{con.conItem}</li>)}
+    </ul>
+  </div>
+</div>
+
+<style lang="scss" is:global>
+  .wrapper-pros-cons{
+    position: relative;
+    z-index: 10;
+    background: #FFF;
+    max-width: 1024PX;
+    margin: 0 auto;
+    border-radius: 55px;
+    margin-top: 24px;
+    padding: 56px 0 48px;
+
+    ul {
+      list-style-type: none ;
+    }
+
+    li:before {
+      background: var(--light-primary);
+      border-radius: 100%;
+      content: "";
+      display: inline-block;
+      margin-right: 18px;
+      max-height: 16px;
+      max-width: 16px;
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+
+  .wrapper-pros-cons{
+    display: flex;
+    justify-content: space-around;
+  }
+</style>

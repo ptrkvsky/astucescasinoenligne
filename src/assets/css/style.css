@@ -10,23 +10,34 @@
 */
 
 :root {
-  --title: Futura, Poppins, -apple-system, BlinkMacSystemFont, Roboto,
+  --title: Didone, Poppins, -apple-system, BlinkMacSystemFont,
     Arial Black, Arial Bold, Arial, sans-serif;
+  --body:Montreal, sans-serif;
+  --body-bolor:#330b4f;
   --dark-primary: #ca171d;
-  --light-primary: #b50029;
+  --light-primary: #e10061;
+  --light-background: #e1000012;
+  --main-gradient: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
+
+
 
 body {
   padding: 0;
   margin: 0;
+  font-family: var(--body);
+  font-variation-settings: "wght" 450;
+  font-weight: 450;
 }
 * {
   box-sizing: border-box;
 }
 
 a {
-  color: var(--light-primary);
+  color: var(--body-color);
 }
+
+
 
 h1,
 h2,
@@ -44,12 +55,6 @@ h6 {
 html {
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
-}
-
-body {
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
-  font-weight: 300;
 }
 
 img {
@@ -713,10 +718,7 @@ a {
   transition: all 400ms ease-in-out;
 }
 
-a:hover {
-  color: #444;
-  text-decoration: none;
-}
+
 
 a:focus {
   outline: none;

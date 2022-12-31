@@ -69,8 +69,8 @@ export async function getAllCategoriesWithSlugs() {
 
     return data?.categories;
   } catch (error) {
-    console.error('👨‍🚒 getAllPostsWithSlugs', error);
-    console.error('👨‍🚒 getAllPostsWithSlugs', request);
+    console.error('👨‍🚒 getAllPostsWithSlugs error -->', error);
+    console.error('👨‍🚒 getAllPostsWithSlugs request -->', request);
   }
 }
 
@@ -161,6 +161,24 @@ export async function getPostBySlug(slug) {
         title
         slug
         content
+        categories {
+          nodes{
+            slug
+          }
+        }
+        post {
+          pros {
+            proItem
+          }
+          cons {
+            conItem
+          }
+          banniere {
+            altText
+            mediaItemUrl
+          }
+          headerBackground
+        }
         seo {
           title
           metaDesc

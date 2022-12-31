@@ -2,11 +2,15 @@
 import logo from '../assets/images/logo.webp';
 import { Image } from '@astrojs/image/components';
 import {seoConfig} from '../utils/seoConfig';
+
+const { headerBackground } = Astro.props;
+
+const finalHeaderBackground = headerBackground || "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)"
 ---
 
 <header id="header" class="header">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
+  <nav class="navbar">
+    <div class="conteneur">
       <!-- LOGO IMAGE -->
 
       <a href="/" class="navbar-brand logo-black"
@@ -32,34 +36,6 @@ import {seoConfig} from '../utils/seoConfig';
             >
           </li>
 
-          <!-- Dropdown Link 
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                   <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                   <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>-->
-
-          <!-- Pnone Number 
-              <li class="navbar-text orange-color"><i class="fa fa-phone-square" aria-hidden="true"></i> 0123 456 789</li>-->
-
-          <!-- Header Social Icons															
-          <li class="header-socials clearfix">
-            <span><a href="#" class="s-link-circle ico-color ico-facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
-            <span><a href="#" class="s-link-circle ico-color ico-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
-            <span><a href="#" class="s-link-circle ico-color ico-behance"><i class="fa fa-behance" aria-hidden="true"></i></a></span>	
-          </li> -->
-
-          <!-- Button 
-          <li><a href="#contacts-3" class="btn btn-green btn-arrow">
-              <span>Contacts <i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-            </a>
-          </li>-->
         </ul>
       </div>
       <!-- End Navigation Menu -->
@@ -70,22 +46,35 @@ import {seoConfig} from '../utils/seoConfig';
 </header>
 <!-- END HEADER -->
 
-<style lang="css" is:global>
+<style define:vars={{finalHeaderBackground}} lang="scss" is:global>
   header {
-    background-color: #ca171d;
+    background: rgb(131,58,180);
+    background: var(--finalHeaderBackground);
     height: 100%;
   }
-  header .container {
+  header .conteneur {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
   }
   @media all and (max-width: 900px) {
-    header .container {
+    header .conteneur {
       flex-direction: column;
     }
   }
-  .navbar-expand-lg .navbar-nav .nav-link {
+  .nav-link {
     color: #fff;
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 24px;
+    font-variation-settings: 'wght' 300;
+    letter-spacing: 1px;
+    &:hover {
+      color: #FFF;
+      text-decoration: underline;
+    }
   }
 
   .navbar-nav {
@@ -93,7 +82,7 @@ import {seoConfig} from '../utils/seoConfig';
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 24px;
     text-align: center;
   }
   @media all and (max-width: 900px) {
