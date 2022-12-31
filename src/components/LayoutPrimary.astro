@@ -23,7 +23,7 @@ const { title, schema, description, image, canonical, headerBackground } = Astro
     {image && <meta property="og:image" content={image} />}
     {
       schema && (
-        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+        <script type="application/ld+json" set:html={schema} />
       )
     }
     <Favicons />
