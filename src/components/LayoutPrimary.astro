@@ -1,12 +1,9 @@
 ---
 import Header from '../components/Header.astro';
-// import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
 import '../assets/css/article.css';
-
 import Favicons from './Favicons.astro';
-
 
 const { title, schema, description, image, canonical, headerBackground, note } = Astro.props;
 
@@ -22,7 +19,6 @@ const noteSchema = note ? {
     }
 } : undefined
 
-console.log("noteSchema", noteSchema)
 ---
 
 <html lang="fr">
@@ -55,15 +51,16 @@ console.log("noteSchema", noteSchema)
   </head>
   <body>
     <slot name="before-main" />
-
-    <Header headerBackground={headerBackground} />
-    <div id="page" class="page">
-      <main>
-        <slot name="main" />
-      </main>
+    <div class="wrapper-header-content">
+      <div id="page" class="page">
+        <main>
+          <slot name="main" />
+        </main>
+      </div>
+      <Header headerBackground={headerBackground} />
     </div>
 
-    <style is:global>
+    <style is:global lang="scss">
       iframe,
       figure {
         max-width: 100% !important;
@@ -91,15 +88,22 @@ console.log("noteSchema", noteSchema)
         -webkit-text-fill-color: transparent;
       }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: #e10061;
-    }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: #e10061;
+      }
 
+      .wrapper-header-content {
+        display: flex;
+        flex-direction: column;
+        header {
+          order: -1;
+        }
+      }
     </style>
   </body>
 </html>

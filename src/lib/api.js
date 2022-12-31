@@ -167,6 +167,10 @@ export async function getPostBySlug(slug) {
           }
         }
         post {
+          faqs {
+            question
+            reponse
+          }
           pros {
             proItem
           }

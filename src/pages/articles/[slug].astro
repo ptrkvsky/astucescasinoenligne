@@ -11,6 +11,7 @@ import star from "../../assets/images/star.svg"
 import ImageStar from '../../components/ImageStar.astro';
 import WrapperRating from '../../components/WrapperRating.astro';
 import SectionProsCons from '../../components/SectionProsCons.astro';
+import Faq from '../../components/Faq.astro';
 
 export async function getStaticPaths() {
   const postsWithSlugs = await getAllPostsWithSlugs();
@@ -27,12 +28,15 @@ const content = post.content || '';
 // const schema = JSON.stringify(post?.seo?.schema?.raw);
 const postsRelated = await getAllPostsListingByCategory(post.categories.nodes[0].slug);
 const banner = post?.post?.banniere?.mediaItemUrl
+const bannerAlt = post?.post?.banniere.altText
 const mainColor = post?.post?.headerBackground
 const pros = post?.post?.pros
 const cons = post?.post?.cons
 const note = post?.post?.note
+const faqs = post?.post?.faqs
 const schema = post?.seo?.schema?.raw
-const schemaUrlReplaced = schema.replace("https://astucescasinoenligne", "https://wwww.astucescasinoenligne.com")
+const schemaUrlReplaced = schema.replace("https://astucescasinoenligne", "https://wwww.astucescasinoenligne.com");
+
 ---
 
 <LayoutPrimary
@@ -43,15 +47,13 @@ const schemaUrlReplaced = schema.replace("https://astucescasinoenligne", "https:
   headerBackground={mainColor}
   note={note}
 >
-
-
   <div class={`wrapper-main ${!banner && "mtop"}`} slot="main">
-  
     {banner && 
     <div class="wrapper-banner"> 
-      <Image format="avif" fit="cover" loading="lazy" alt="article" width={2048} height={414} src={banner} />
+      <Image alt={bannerAlt} format="avif" fit="cover" loading="lazy" alt="article" width={2048} height={414} src={banner} />
     </div>
     }
+  
     <div >
       <div class={`wrapper-h1 ${banner && "has-banner"}`}>
         <h1>{post.title}</h1>
@@ -70,13 +72,13 @@ const schemaUrlReplaced = schema.replace("https://astucescasinoenligne", "https:
         </ul>
       </section>
     </div>
-
-    
+    <div>
+      {faqs?.length > 0 && <Faq faqs={faqs}/>}
+    </div>
   </div>
 </LayoutPrimary>
 
 <style lang="scss" is:global>
-
   p.video { 
     overflow:hidden; 
     padding-bottom:56.25%; 
@@ -262,6 +264,4 @@ const schemaUrlReplaced = schema.replace("https://astucescasinoenligne", "https:
   iframe {
     max-width: 100% !important;
   }
-
-
 </style>

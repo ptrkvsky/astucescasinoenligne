@@ -1,0 +1,51 @@
+---
+import { getFaq } from "../helpers/getFaq";
+
+const {faqs} = Astro.props
+const schema = getFaq(faqs)
+
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<div class="wrapper-faqs">
+  <div class="conteneur-faq">
+    <h2>Questions fréquentes</h2>
+    <div> 
+      {faqs.map(faq => {
+        return <div>  
+            <h3>{faq.question}</h3>
+            <p>{faq.reponse}</p>
+          </div>
+      })}
+    </div>
+  </div>
+</div>
+
+<style lang="scss" is:global>
+  .wrapper-faqs {
+    position: relative;
+    margin: 24px auto 0 auto;
+    padding: 56px 24px 48px;
+    z-index: 10;
+    background: #FFF;
+    max-width: 1024PX;
+    border-radius: 55px;
+  
+    h2 {
+      margin-top: 0;
+    }
+
+    h3 {
+      font-size: 32px;
+      @media (max-width:900px) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.2;
+      max-width: 640px;
+    }
+  }
+</style>
