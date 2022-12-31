@@ -32,16 +32,16 @@ const pros = post?.post?.pros
 const cons = post?.post?.cons
 const note = post?.post?.note
 const schema = post?.seo?.schema?.raw
-const schemaUrlRepaced = schema.replace("https://astucescasinoenligne", "https://wwww.astucescasinoenligne.com")
-console.log(note, note)
+const schemaUrlReplaced = schema.replace("https://astucescasinoenligne", "https://wwww.astucescasinoenligne.com")
 ---
 
 <LayoutPrimary
   title={post.seo.title}
   description={post.seo.metaDesc}
   canonical={`${seoConfig.baseURL}/articles/${post.slug}`}
-  schema={schemaUrlRepaced}
+  schema={schemaUrlReplaced}
   headerBackground={mainColor}
+  note={note}
 >
 
 

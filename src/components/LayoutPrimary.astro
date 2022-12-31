@@ -8,7 +8,21 @@ import '../assets/css/article.css';
 import Favicons from './Favicons.astro';
 
 
-const { title, schema, description, image, canonical, headerBackground } = Astro.props;
+const { title, schema, description, image, canonical, headerBackground, note } = Astro.props;
+
+const noteSchema = note ? {
+    "@context": "https://schema.org/",
+    "@type": "CreativeWorkSeries",
+    "name": title,
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": note,
+        "bestRating": note,
+        "ratingCount": "1"
+    }
+} : undefined
+
+console.log("noteSchema", noteSchema)
 ---
 
 <html lang="fr">
@@ -24,6 +38,13 @@ const { title, schema, description, image, canonical, headerBackground } = Astro
     {
       schema && (
         <script type="application/ld+json" set:html={schema} />
+      )
+    }
+
+
+    {
+      noteSchema && (
+        <script type="application/ld+json" set:html={JSON.stringify(noteSchema)} />
       )
     }
     <Favicons />
