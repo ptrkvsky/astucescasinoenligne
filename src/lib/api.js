@@ -177,6 +177,7 @@ export async function getPostBySlug(slug) {
             altText
             mediaItemUrl
           }
+          note
           headerBackground
         }
         seo {

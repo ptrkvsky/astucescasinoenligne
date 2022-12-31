@@ -30,16 +30,20 @@ const banner = post?.post?.banniere?.mediaItemUrl
 const mainColor = post?.post?.headerBackground
 const pros = post?.post?.pros
 const cons = post?.post?.cons
-
+const note = post?.post?.note
+const schema = post?.seo?.schema?.raw
+const schemaUrlRepaced = schema.replace("https://astucescasinoenligne", "https://wwww.astucescasinoenligne.com")
+console.log(note, note)
 ---
 
 <LayoutPrimary
   title={post.seo.title}
   description={post.seo.metaDesc}
   canonical={`${seoConfig.baseURL}/articles/${post.slug}`}
-  schema={post?.seo?.schema?.raw}
+  schema={schemaUrlRepaced}
   headerBackground={mainColor}
 >
+
 
   <div class={`wrapper-main ${!banner && "mtop"}`} slot="main">
   
@@ -51,7 +55,7 @@ const cons = post?.post?.cons
     <div >
       <div class={`wrapper-h1 ${banner && "has-banner"}`}>
         <h1>{post.title}</h1>
-        {pros?.note && <WrapperRating note={pros.note} mainColor={mainColor} />}
+        {note && <WrapperRating note={note} mainColor={mainColor} />}
       </div>
     </div>
     {pros?.length > 0 && cons?.length > 0 && <SectionProsCons pros={pros} cons={cons} />}
