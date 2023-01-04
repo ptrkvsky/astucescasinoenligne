@@ -11,6 +11,11 @@
       "statusCode": 301
     },
     {
+      "source": "/articles/casino-betzino",
+      "destination": "https://astucescasinoenligne.com/articles/avis-casino-betzino",
+      "statusCode": 301
+    },
+    {
       "source": "/retrait-bitcasino.html",
       "destination": "https://astucescasinoenligne.com/articles/retrait-bitcasino",
       "statusCode": 301
