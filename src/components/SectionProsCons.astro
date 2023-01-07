@@ -9,7 +9,7 @@ const {pros,cons} = Astro.props
       {pros?.map(pro => <li>{pro.proItem}</li>)}
     </ul>
   </div>
-  <div>
+  <div class="inconvenient">
     <h2>Inconvénients</h2>
     <ul> 
       {cons?.map(con => <li>{con.conItem}</li>)}
@@ -42,11 +42,22 @@ const {pros,cons} = Astro.props
       max-width: 16px;
       min-height: 16px;
       min-width: 16px;
+
+      @media (max-width: 900px) {
+        margin-right: 8px;
+      }
     }
   }
 
   .wrapper-pros-cons{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 32px;
+
+    @media (max-width: 900px) {
+      padding: 0  12px 32px 12px;
+      grid-template-columns: 1fr;
+    }
   }
 </style>
